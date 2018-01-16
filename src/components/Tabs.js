@@ -1,12 +1,6 @@
 import React from 'react';
+import Item from './Item';
 import {Tabs, Tab} from 'material-ui/Tabs';
-
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
-import ActionInfo from 'material-ui/svg-icons/action/info';
-import StarBorder from 'material-ui/svg-icons/toggle/star-border';
-
-import {Motion, spring} from 'react-motion';
-
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const styles = {
@@ -22,16 +16,6 @@ const styles = {
   }
 };
 
-const Thing = () => (
-  <Motion defaultStyle={{ opacity: 0 }} style={{ opacity: spring(1) }}>
-    { (style) => <div style={style}>Can you see me?</div> }
-  </Motion>
-)
-
-function handleActive(tab) {
-  alert(`A tab with this route property ${tab.props.index} was activated.`);
-}
-
 export default class TabsExampleSimple extends React.Component {
   constructor(props) {
     super(props)
@@ -39,25 +23,16 @@ export default class TabsExampleSimple extends React.Component {
     this.state = {
       words:this.props.words
     }
+
   }
 
 
-
   render() {
-    console.log(this.state)
+    console.log(this.state.location)
     let words = this.state.words.map((memo, i) => {
                   //if(!memo.isDeleted)
                   return(
-                    <Toolbar key = {i} style = {{backgroundColor:'white', borderBottom:'1px solid gray'}}>
-                      <ToolbarGroup firstChild={true} style={{padding:'10px'}}>
-                        {memo.string}
-                      </ToolbarGroup>
-                      <ToolbarGroup>
-                        <StarBorder/>
-                        <ActionInfo />
-                        <Thing/>
-                      </ToolbarGroup>                      
-                    </Toolbar>                      
+                    <Item string={memo.string} key={i}/>                    
                   );
                 })
 
