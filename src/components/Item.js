@@ -1,16 +1,15 @@
 import React from 'react';
-
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import ActionInfo from 'material-ui/svg-icons/action/info';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
-
 import {Motion, spring} from 'react-motion';
 
 class Item extends React.Component {
 	constructor(props) {
 		super(props)
 	    this.state = {
-			location:[],
+			location:[0],
+			clickedPosition:1,
 			isClicked:false
 		}
 
@@ -22,10 +21,11 @@ class Item extends React.Component {
 
 	}
 
-	  handleMouseDown() {
+	  handleMouseDown(e) {
 	    if(!this.state.isClicked) {
 	      this.setState({
-	        isClicked: !this.state.isClicked
+	        isClicked: !this.state.isClicked,
+	        clickedPosition: e.clientX
 	      })
 	      window.addEventListener('mousemove',this.handleMouseMove,true);
 	      window.addEventListener('touchmove',this.handleTouchMove,true);
@@ -55,18 +55,36 @@ class Item extends React.Component {
 
 
     render(){
+    	console.log(this.state.location[0]);
+    	console.log(this.state.clickedPosition);
         return (
-        	<div>
-    		    <Toolbar style = {{backgroundColor:'white', borderBottom:'1px solid gray', position:'absolute', left:this.state.location[0]}} onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>
-                  <ToolbarGroup firstChild={true} style={{padding:'10px'}}>
-                    {this.props.string}
-                  </ToolbarGroup>
-                  <ToolbarGroup>
-                    <StarBorder/>
-                    <ActionInfo />
-                  </ToolbarGroup>                      
-                </Toolbar>    
-            </div>
+        	
+        	<Motion style={{x: spring(0)}}>
+              {({x}) =>
+	            <div>
+	    		    <Toolbar 
+	    		    	style = {{
+	    		    		transform: `translate(${x}px,0)`, 
+	    		    		backgroundColor:'white', 
+	    		    		borderBottom:'1px solid gray', 
+	    		    		width:'100%', 
+	    		    		position:'absolute', 
+	    		    		left:this.state.isClicked?this.state.location[0]-this.state.clickedPosition:1
+	    		    	}} 
+    		    		onMouseDown={this.handleMouseDown} 
+    		    		onMouseUp={this.handleMouseUp}
+		    		>
+	                  <ToolbarGroup firstChild={true} style={{padding:'10px'}}>
+	                    {this.props.string}
+	                  </ToolbarGroup>
+	                  <ToolbarGroup>
+	                    <StarBorder/>
+	                    <ActionInfo />
+	                  </ToolbarGroup>                      
+	                </Toolbar>    
+	            </div>
+              }
+            </Motion>
         );
     }
 }

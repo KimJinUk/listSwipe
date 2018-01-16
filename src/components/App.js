@@ -13,7 +13,7 @@ class App extends React.Component {
 				meanA:'',
 				meanV:'',
 				isFavorite:'',
-			},{
+			},/*{
 				string:'orthodox',
 				meanN:'정통파의 사람',
 				meanA:'정통의',
@@ -25,7 +25,7 @@ class App extends React.Component {
 				meanA:'',
 				meanV:'싸우다, 다투다',
 				isFavorite:'',
-			}]
+			}*/]
 		}
 
 	}
