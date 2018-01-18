@@ -28,11 +28,10 @@ export default class TabsExampleSimple extends React.Component {
 
 
   render() {
-    console.log(this.state.location)
     let words = this.state.words.map((memo, i) => {
                   //if(!memo.isDeleted)
                   return(
-                    <Item string={memo.string} key={i}/>                    
+                    <Item words={memo} key={i}/>                    
                   );
                 })
 
