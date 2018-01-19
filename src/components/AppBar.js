@@ -13,6 +13,7 @@ const AppBarExampleIcon = () => (
 			    </IconButton>
  			}
 			title="단어장 단어"
+			titleStyle={{fontSize:18}}
 			style={{backgroundColor:'rgb(76,175,80)'}}
 		/>
 	</MuiThemeProvider>
