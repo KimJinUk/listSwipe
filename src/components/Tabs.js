@@ -32,6 +32,7 @@ export default class TabsExampleSimple extends React.Component {
                   return(
                     <Item words={memo} deleteWord={this.props.deleteWord} key={i} i={i}/>                    
                   );
+                })
 
     return (
       <MuiThemeProvider>
