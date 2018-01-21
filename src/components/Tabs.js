@@ -20,22 +20,18 @@ export default class TabsExampleSimple extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      words:this.props.words
-    }
+    // this.state = {
+    //   words:this.props.words
+    // }
 
   }
 
 
   render() {
-    let words = this.state.words.map((memo, i) => {
-                  //if(!memo.isDeleted)
+    let words = this.props.words.map((memo, i) => {
                   return(
-                    <Item words={memo} key={i} i={i}/>                    
+                    <Item words={memo} deleteWord={this.props.deleteWord} key={i} i={i}/>                    
                   );
-                })
-
-    
 
     return (
       <MuiThemeProvider>

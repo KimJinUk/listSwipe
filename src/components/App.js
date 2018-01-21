@@ -2,6 +2,8 @@ import React from 'react';
 import AppBar from './AppBar';
 import Tabs from './Tabs';
 
+import update from 'react-addons-update';
+
 class App extends React.Component {
 	constructor(props) {
 		super(props)
@@ -28,15 +30,25 @@ class App extends React.Component {
 			}]
 		}
 
+		this.deleteWord = this.deleteWord.bind(this)
 	}
 
+	deleteWord(index) {
+		this.setState({
+			words: update(
+				this.state.words,
+				{
+					$splice:[[index, 1]]
+				})
+		});
+
+	}
 
     render(){
-    	//console.log(this.state.words)
         return (
         	<div>
             	<AppBar/>
-            	<Tabs words = {this.state.words}/>
+            	<Tabs words = {this.state.words} deleteWord = {this.deleteWord}/>
             </div>
         );
     }
